@@ -1,0 +1,330 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.uispec4j</groupId>
+  <version>17.0-rc1</version>
+  <artifactId>uispec4j</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.4.0</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>9.2</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-util</artifactId>
+      <version>9.2</version>
+      <optional>true</optional>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- Project Information -->
+  <name>uispec4j</name>
+  <description>Java/Swing GUI testing made simple!</description>
+  <url>https://www.uispec4j.org</url>
+  <inceptionYear>2004</inceptionYear>
+  <licenses>
+    <license>
+      <name>Common Public License</name>
+      <url>https://opensource.org/licenses/cpl1.0.php</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+  <mailingLists>
+    <mailingList>
+      <name>UISpec4J discussion group</name>
+      <subscribe>uispec4j-subscribe@yahoogroups.com</subscribe>
+      <unsubscribe>uispec4j-unsubscribe@yahoogroups.com</unsubscribe>
+      <archive>https://groups.yahoo.com/group/uispec4j/</archive>
+    </mailingList>
+  </mailingLists>
+  <developers>
+    <developer>
+      <name>Regis Medina</name>
+      <id>rmedina</id>
+      <email>regis DOT medina AT design-up DOT com</email>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <name>Boris Gonnot</name>
+      <id>gonnot</id>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <name>Pascal Pratmarty</name>
+      <id>ppratmarty</id>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <name>Sebastien Crego</name>
+      <id>scrego</id>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <name>Sylvain Rousseau</name>
+      <id>sroussea</id>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <name>Marc Guiot</name>
+      <id>mguiot</id>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <name>Thomas Santana</name>
+      <id>nebulorum</id>
+      <timezone>-3</timezone>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>https://github.com/UISpec4J/UISpec4J</url>
+    <connection>scm:git:git://github.com/UISpec4J/UISpec4J.git</connection>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.3.1</junit.version>
+  </properties>
+
+  <!-- Build Settings -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <type>pom</type>
+        <scope>import</scope>
+        <version>${junit.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.9.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>17</source>
+          <target>17</target>
+          <encoding>UTF-8</encoding>
+          <showDeprecation>true</showDeprecation>
+          <showWarnings>true</showWarnings>
+          <compilerArgs>
+            <arg>--add-exports</arg>
+            <arg>java.desktop/java.awt.peer=org.uispec4j</arg>
+            <arg>--add-exports</arg>
+            <arg>java.desktop/java.awt.dnd.peer=org.uispec4j</arg>
+
+            <arg>--add-exports</arg>
+            <arg>java.desktop/sun.awt=org.uispec4j</arg>
+            <arg>--add-exports</arg>
+            <arg>java.desktop/sun.awt.image=org.uispec4j</arg>
+            <arg>--add-exports</arg>
+            <arg>java.desktop/sun.awt.datatransfer=org.uispec4j</arg>
+
+            <arg>--add-exports</arg>
+            <arg>java.desktop/sun.java2d.pipe=org.uispec4j</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <argLine>
+            --add-opens java.desktop/java.awt=org.uispec4j
+            --add-exports java.desktop/sun.awt=org.uispec4j
+            --add-exports java.desktop/java.awt.peer=org.uispec4j
+            --add-exports java.desktop/sun.lwawt.macosx=org.uispec4j
+            --add-exports java.desktop/sun.awt.windows=org.uispec4j
+            --add-exports java.desktop/sun.awt.X11=org.uispec4j
+          </argLine>
+          <systemProperties>
+            <property>
+              <name>uispec4j.test.library</name>
+              <value>junit</value>
+            </property>
+          </systemProperties>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.0.0-M3</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.8</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Automatic-Module-Name>org.uispec4j</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>factset</id>
+      <distributionManagement>
+        <repository>
+          <id>thirdparty</id>
+          <name>bisam-thirdparty</name>
+          <url>https://artifactory.factset.com/artifactory/bisam-libs-thirdparty/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>ci-headless</id>
+      <dependencies>
+        <!--  https://github.com/CaciocavalloSilano/caciocavallo -->
+        <!--        http://www.eteks.com/pja/ -->
+        <dependency>
+          <groupId>com.github.caciocavallosilano</groupId>
+          <artifactId>cacio-tta</artifactId>
+          <version>1.11</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <java.awt.headless>false</java.awt.headless>
+                <awt.toolkit>com.github.caciocavallosilano.cacio.ctc.CTCToolkit</awt.toolkit>
+                <java.awt.graphicsenv>com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment</java.awt.graphicsenv>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.3.0</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+              <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <!-- POM's layout - http://www.javaworld.com/javaworld/jw-05-2006/jw-0529-maven.html -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- POM Relationships -->
+  <parent>
+    <groupId>org.uispec4j</groupId>
+    <artifactId>uispec4j-root</artifactId>
+    <version>17.0-rc1</version>
+  </parent>
+  <artifactId>addressbook</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.uispec4j</groupId>
+      <artifactId>uispec4j</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
+  <!-- Project Information -->
+  <name>addressbook</name>
+  <description>UISpec4J sample application</description>
+  <url>https://www.uispec4j.org</url>
+  <inceptionYear>2004</inceptionYear>
+  <licenses>
+    <license>
+      <name>Common Public License</name>
+      <url>https://www.opensource.org/licenses/cpl.php</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+
+  <!-- Build Settings -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <argLine>
+            --add-opens java.desktop/java.awt=ALL-UNNAMED
+            --add-exports java.desktop/sun.awt=ALL-UNNAMED
+            --add-exports java.desktop/java.awt.peer=ALL-UNNAMED
+            --add-exports java.desktop/sun.lwawt.macosx=ALL-UNNAMED
+            --add-exports java.desktop/sun.awt.windows=ALL-UNNAMED
+            --add-exports java.desktop/sun.awt.X11=ALL-UNNAMED
+          </argLine>
+          <systemProperties>
+            <property>
+              <name>uispec4j.test.library</name>
+              <value>junit</value>
+            </property>
+          </systemProperties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
